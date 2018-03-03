@@ -1,0 +1,27 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>HospitalDetail</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="call()">
+        <ion-icon name="call"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <div class="w-full h-64">
+    <ion-img class="w-full h-full" [src]="hospital.img" alt=""></ion-img>
+  </div>
+
+  <div class="p-8">
+    <p class="text-3xl text-grey-darker font-bold ">
+      {{hospital.name}}
+    </p>
+  </div>
+</ion-content>

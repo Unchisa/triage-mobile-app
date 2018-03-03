@@ -9,6 +9,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Loading } from 'ionic-angular/components/loading/loading';
 import { App } from 'ionic-angular/components/app/app';
+import { HospitalDetailPage } from '../pages/hospital-detail/hospital-detail';
 
 @Component({
   templateUrl: 'app.html'

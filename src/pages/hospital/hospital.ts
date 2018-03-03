@@ -1,7 +1,7 @@
 import { LoadingController } from "ionic-angular/components/loading/loading-controller";
 import { Loading } from "ionic-angular/components/loading/loading";
 import { Component, ViewChild } from "@angular/core";
-import { NavController, NavParams } from "ionic-angular";
+import { NavController, NavParams, ModalController } from "ionic-angular";
 import { CallNumber } from "@ionic-native/call-number";
 import { Geolocation } from "@ionic-native/geolocation";
 import { ToastController } from "ionic-angular/components/toast/toast-controller";
@@ -14,6 +14,7 @@ import {
   MarkerOptions,
   Marker
 } from "@ionic-native/google-maps";
+import { HospitalDetailPage } from "../hospital-detail/hospital-detail";
 
 declare var google;
 
@@ -41,7 +42,8 @@ export class HospitalPage {
     public navParams: NavParams,
     public geolocation: Geolocation,
     public googleMaps: GoogleMaps,
-    public phone: CallNumber
+    public phone: CallNumber,
+    public modalCtrl: ModalController
   ) { }
 
   ionViewDidLoad() {
@@ -103,7 +105,13 @@ export class HospitalPage {
               this.googlePlaceService.getDetails(
                 placeDetailRequest,
                 (place, status) => {
-                  if (status === 'OK') hospital.phoneNumber = place.international_phone_number;
+                  if (status === 'OK') {
+                    hospital.phoneNumber = place.international_phone_number;
+                    hospital.img = place.photos[0].getUrl({
+                      'maxWidth': 800,
+                      'maxHeight': 800
+                    });
+                  }
                 }
               );
 
@@ -117,7 +125,7 @@ export class HospitalPage {
                 }
               }).then(marker => {
                 marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-                  alert(JSON.stringify(hospital));
+                  this.modalCtrl.create(HospitalDetailPage, { hospital: hospital }).present();
                 });
               });
 
