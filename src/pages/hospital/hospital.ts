@@ -125,7 +125,7 @@ export class HospitalPage {
                 }
               }).then(marker => {
                 marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-                  this.modalCtrl.create(HospitalDetailPage, { hospital: hospital }).present();
+                  this.navCtrl.push(HospitalDetailPage, { hospital: hospital })
                 });
               });
 
